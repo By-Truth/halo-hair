@@ -1,3 +1,8 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--
   Halo Hair — landing page
   ▸ Replace the WhatsApp number: search this file for  2340000000000  and swap in
@@ -33,15 +38,15 @@
     --s-0:1.0625rem;
     --s-1:1.3rem;
     --s-2:1.85rem;
-    --s-3:2.6rem;
+    --s-3:clamp(2rem,5.6vw,2.6rem);
     --s-4:clamp(2.9rem,7.2vw,5.4rem);
 
     --wrap:1160px;
     --pad:clamp(1.2rem,5vw,2.5rem);
     --gap-section:clamp(4rem,9vw,7rem);
   }
-  :root:not([data-theme="light"]){
-    @media (prefers-color-scheme:dark){
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
       --petal:#241A18;
       --blush:#2F221F;
       --mauve:#402E29;
@@ -122,7 +127,7 @@
   .menu-toggle{display:none;background:none;border:1px solid var(--line);border-radius:8px;
     padding:.5rem .6rem;color:var(--cocoa);cursor:pointer}
 
-  .hero{padding-block:clamp(3rem,7vw,5.5rem) var(--gap-section)}
+  .hero{padding-block:clamp(3rem,7vw,5.5rem) var(--gap-section);overflow-x:hidden;overflow-x:clip}
   .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
   .hero h1{font-size:var(--s-4);margin:0 0 1.4rem}
   .hero h1 em{font-style:italic;color:var(--coral)}
@@ -153,7 +158,7 @@
   .strip .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem 2rem;
     padding-block:1.4rem;font-family:var(--f-display);font-size:var(--s-1);font-style:italic;color:var(--cocoa-soft)}
 
-  section.blk{padding-block:var(--gap-section)}
+  .blk{padding-block:var(--gap-section)}
   .head{max-width:52ch;margin-bottom:clamp(2.5rem,5vw,3.5rem)}
   .head h2{font-size:var(--s-3)}
   .head p{margin-top:1rem;color:var(--cocoa-soft)}
@@ -161,7 +166,8 @@
   .range-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem}
   .prod{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--line);
     border-radius:6px;overflow:hidden}
-  .prod .pic{aspect-ratio:4/3;overflow:hidden}
+  .prod .pic{aspect-ratio:4/3;overflow:hidden;position:relative}
+  .prod .pic .shot{position:absolute;inset:0}
   .prod .body{padding:1.6rem 1.5rem 1.7rem;display:flex;flex-direction:column;gap:.9rem;flex:1}
   .prod h3{font-size:var(--s-2)}
   .prod ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.35rem;
@@ -238,7 +244,10 @@
   @media (max-width:940px){
     .hero-grid{grid-template-columns:1fr;text-align:left}
     .halo{max-width:360px}
-    .range-grid{grid-template-columns:1fr 1fr}
+    .range-grid{grid-template-columns:1fr}
+    .prod{flex-direction:row}
+    .prod .pic{flex:0 0 40%;aspect-ratio:auto;min-height:240px}
+    .prod .body{justify-content:center}
     .reviews{grid-template-columns:1fr;gap:2rem}
     .specs .grid{grid-template-columns:1fr}
     nav.links,.bar>.btn{display:none}
@@ -246,17 +255,21 @@
     nav.links.open{display:flex;flex-direction:column;gap:1.2rem;position:absolute;left:0;right:0;top:100%;
       background:var(--petal);border-bottom:1px solid var(--line);padding:1.5rem var(--pad)}
     .foot-grid{grid-template-columns:1fr 1fr}
-  }
-  @media (max-width:620px){
-    .range-grid{grid-template-columns:1fr}
-    .step{grid-template-columns:1fr;gap:.4rem}
-    .step .n{font-size:var(--s-2)}
-    .foot-grid{grid-template-columns:1fr}
     .mobile-cta{display:block}
     body{padding-bottom:5rem}
   }
+  @media (max-width:620px){
+    .prod{flex-direction:column}
+    .prod .pic{flex:none;aspect-ratio:4/3;min-height:0}
+    .spec-row{grid-template-columns:1fr;gap:.3rem}
+    .step{grid-template-columns:1fr;gap:.4rem}
+    .step .n{font-size:var(--s-2)}
+    .foot-grid{grid-template-columns:1fr}
+  }
   @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
+</head>
+<body>
 
 <header>
   <div class="wrap bar">
@@ -539,3 +552,5 @@
     if(e.target.tagName==='A'){nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');}
   });
 </script>
+</body>
+</html>
